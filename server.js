@@ -26,11 +26,11 @@ app.listen(port, () => {
     console.log('Server running on port ' , port);
 });
 
-//Example Route: Get all cards
-app.get('/allcards', async (req, res) => {
+//Example Route: Get all games
+app.get('/allgames', async (req, res) => {
     try {
         let connection = await mysql.createConnection(dbConfig);
-        const [rows] = await connection.execute('SELECT * FROM defaultdb.cards');
+        const [rows] = await connection.execute('SELECT * FROM defaultdb.games');
         res.json(rows);
     } catch (err) {
         console.error(err);
@@ -38,12 +38,12 @@ app.get('/allcards', async (req, res) => {
     }
 });
 
-//Example Route: Create a new card
-app.post('/addcard', async(req,res) => {
-    const {card_name, card_pic} = req.body;
+//Example Route: Create a new game
+app.post('/addgames', async(req,res) => {
+    const {game_name, game_pic} = req.body;
     try{
         let connection = await mysql.createConnection(dbConfig)
-        await connection.execute('INSERT INTO cards (card_name, card_pic) VALUES (?, ?)',  [card_name, card_pic]);
+        await connection.execute('INSERT INTO gamess (game_name, game_pic) VALUES (?, ?)',  [game_name, game_pic]);
         res.status(201).json({message: 'Card' + card_name +'added successfully'});
     }
 
@@ -52,4 +52,3 @@ app.post('/addcard', async(req,res) => {
         res.status(500).json({messgae: 'Server error - could not add card' + card_name});
     }
 });
-
