@@ -38,7 +38,7 @@ app.get('/allgames', async (req, res) => {
     }
 });
 
-//Example Route: Create a new card
+//Example Route: Create a new game
 app.post('/addgames', async(req,res) => {
     const {game_name, game_pic} = req.body;
     try{
