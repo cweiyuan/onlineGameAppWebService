@@ -52,3 +52,17 @@ app.post('/addgames', async(req,res) => {
         res.status(500).json({messgae: 'Server error - could not add card' + card_name});
     }
 });
+
+// Delete Route: Delete a game by ID
+app.delete('/deletegame/:id', async(req,res) => {
+    const {id} = req.params;
+    try{
+        let connection = await mysql.createConnection(dbConfig)
+        await connection.execute('DELETE FROM defaultdb.games WHERE id = ?', [id]);
+        res.json({message: 'Game deleted successfully'});
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).json({message: 'Server error - could not delete game'});
+    }
+});
