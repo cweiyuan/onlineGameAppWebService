@@ -44,12 +44,12 @@ app.post('/addgames', async(req,res) => {
     try{
         let connection = await mysql.createConnection(dbConfig)
         await connection.execute('INSERT INTO games (game_name, game_pic) VALUES (?, ?)',  [game_name, game_pic]);
-        res.status(201).json({message: 'Card' + card_name +'added successfully'});
+        res.status(201).json({message: 'Game' + game_name +'added successfully'});
     }
 
     catch (err) {
         console.error(err);
-        res.status(500).json({messgae: 'Server error - could not add card' + card_name});
+        res.status(500).json({messgae: 'Server error - could not add game' + game_name});
     }
 });
 
