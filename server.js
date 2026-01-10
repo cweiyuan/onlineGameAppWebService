@@ -53,6 +53,25 @@ app.post('/addgames', async(req,res) => {
     }
 });
 
+// Update Route: Update a game by ID
+app.put('/updategame/:id', async (req, res) => {
+    const { id } = req.params;
+    const { game_name, game_pic } = req.body;
+
+    try {
+        let connection = await mysql.createConnection(dbConfig);
+        await connection.execute(
+            'UPDATE defaultdb.games SET game_name = ?, game_pic = ? WHERE id = ?',
+            [game_name, game_pic, id]
+        );
+        res.json({ message: 'Game updated successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Server error - could not update game' });
+    }
+});
+
+
 // Delete Route: Delete a game by IDs
 app.delete('/deletegame/:id', async(req,res) => {
     const {id} = req.params;
