@@ -53,7 +53,7 @@ app.post('/addgames', async(req,res) => {
     }
 });
 
-// Delete Route: Delete a game by ID
+// Delete Route: Delete a game by IDs
 app.delete('/deletegame/:id', async(req,res) => {
     const {id} = req.params;
     try{
