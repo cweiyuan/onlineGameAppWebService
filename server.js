@@ -34,7 +34,7 @@ app.get('/allgames', async (req, res) => {
         res.json(rows);
     } catch (err) {
         console.error(err);
-        res.status(500).json({message:'Server error for allcards'});
+        res.status(500).json({message:'Server error for allgames'});
     }
 });
 
@@ -43,7 +43,7 @@ app.post('/addgames', async(req,res) => {
     const {game_name, game_pic} = req.body;
     try{
         let connection = await mysql.createConnection(dbConfig)
-        await connection.execute('INSERT INTO gamess (game_name, game_pic) VALUES (?, ?)',  [game_name, game_pic]);
+        await connection.execute('INSERT INTO games (game_name, game_pic) VALUES (?, ?)',  [game_name, game_pic]);
         res.status(201).json({message: 'Card' + card_name +'added successfully'});
     }
 
